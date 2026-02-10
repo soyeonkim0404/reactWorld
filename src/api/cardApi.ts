@@ -1,5 +1,5 @@
-import type { CardData, ApiResponse } from './types';
-import { fakeCards } from './fakeData';
+import type { CardData, ApiResponse } from "./types";
+import { fakeCards } from "./fakeData";
 
 // 모든 카드 가져오기
 export const getAllCards = async (): Promise<ApiResponse<CardData[]>> => {
@@ -9,7 +9,7 @@ export const getAllCards = async (): Promise<ApiResponse<CardData[]>> => {
   return {
     data: fakeCards,
     success: true,
-    message: '카드 목록을 성공적으로 가져왔습니다.',
+    message: "카드 목록을 성공적으로 가져왔습니다.",
   };
 };
 
@@ -23,25 +23,24 @@ export const getCardById = async (id: string): Promise<ApiResponse<CardData | nu
     return {
       data: null,
       success: false,
-      message: '카드를 찾을 수 없습니다.',
+      message: "카드를 찾을 수 없습니다.",
     };
   }
 
   return {
     data: card,
     success: true,
-    message: '카드를 성공적으로 가져왔습니다.',
+    message: "카드를 성공적으로 가져왔습니다.",
   };
 };
 
 // 카드 생성
-export const createCard = async (cardData: Omit<CardData, 'id' | 'createdAt'>): Promise<ApiResponse<CardData>> => {
+export const createCard = async (cardData: Omit<CardData, "id">): Promise<ApiResponse<CardData>> => {
   await new Promise((resolve) => setTimeout(resolve, 500));
 
   const newCard: CardData = {
     ...cardData,
     id: String(fakeCards.length + 1),
-    createdAt: new Date().toISOString(),
   };
 
   fakeCards.push(newCard);
@@ -49,7 +48,7 @@ export const createCard = async (cardData: Omit<CardData, 'id' | 'createdAt'>): 
   return {
     data: newCard,
     success: true,
-    message: '카드가 성공적으로 생성되었습니다.',
+    message: "카드가 성공적으로 생성되었습니다.",
   };
 };
 
@@ -63,20 +62,19 @@ export const updateCard = async (id: string, cardData: Partial<CardData>): Promi
     return {
       data: null,
       success: false,
-      message: '카드를 찾을 수 없습니다.',
+      message: "카드를 찾을 수 없습니다.",
     };
   }
 
   fakeCards[cardIndex] = {
     ...fakeCards[cardIndex],
     ...cardData,
-    updatedAt: new Date().toISOString(),
   };
 
   return {
     data: fakeCards[cardIndex],
     success: true,
-    message: '카드가 성공적으로 업데이트되었습니다.',
+    message: "카드가 성공적으로 업데이트되었습니다.",
   };
 };
 
@@ -90,7 +88,7 @@ export const deleteCard = async (id: string): Promise<ApiResponse<boolean>> => {
     return {
       data: false,
       success: false,
-      message: '카드를 찾을 수 없습니다.',
+      message: "카드를 찾을 수 없습니다.",
     };
   }
 
@@ -99,6 +97,6 @@ export const deleteCard = async (id: string): Promise<ApiResponse<boolean>> => {
   return {
     data: true,
     success: true,
-    message: '카드가 성공적으로 삭제되었습니다.',
+    message: "카드가 성공적으로 삭제되었습니다.",
   };
 };

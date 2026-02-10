@@ -3,8 +3,6 @@ export interface CardData {
   title: string;
   description?: string;
   content: string;
-  createdAt: string;
-  updatedAt?: string;
   tags?: string[];
   link?: string;
 }

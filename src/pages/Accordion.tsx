@@ -1,10 +1,10 @@
-import Accordion from '@/components/Accordion';
-import type { AccordionItemProps } from '@/components/Accordion';
+import Accordion from "@/components/Accordion";
+import type { AccordionItemProps } from "@/components/Accordion";
 
 const AccordionPage = () => {
   const accordionItems: AccordionItemProps[] = [
     {
-      title: '첫 번째 항목',
+      title: "첫 번째 항목",
       children: (
         <div>
           <p className="mb-2">첫 번째 항목의 내용입니다.</p>
@@ -13,10 +13,9 @@ const AccordionPage = () => {
           </p>
         </div>
       ),
-      defaultOpen: true,
     },
     {
-      title: '두 번째 항목',
+      title: "두 번째 항목",
       children: (
         <div>
           <p className="mb-2">두 번째 항목의 내용입니다.</p>
@@ -29,7 +28,7 @@ const AccordionPage = () => {
       ),
     },
     {
-      title: '세 번째 항목',
+      title: "세 번째 항목",
       children: (
         <div>
           <p className="mb-2">세 번째 항목의 내용입니다.</p>
@@ -40,14 +39,12 @@ const AccordionPage = () => {
       ),
     },
     {
-      title: '네 번째 항목',
+      title: "네 번째 항목",
       children: (
         <div>
           <p className="mb-2">네 번째 항목의 내용입니다.</p>
           <div className="bg-gray-50 p-3 rounded-md">
-            <p className="text-sm text-gray-700">
-              특별한 스타일링이 적용된 컨텐츠도 포함할 수 있습니다.
-            </p>
+            <p className="text-sm text-gray-700">특별한 스타일링이 적용된 컨텐츠도 포함할 수 있습니다.</p>
           </div>
         </div>
       ),
@@ -55,15 +52,15 @@ const AccordionPage = () => {
   ];
 
   return (
-    <div className="min-h-screen p-8">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6">Accordion 컴포넌트</h1>
-        <div className="mb-8">
-          <Accordion items={accordionItems} allowMultiple={false} className="mb-6" />
+    <div className="max-w-[920px] m-auto">
+      <div className="mx-auto flex  gap-4">
+        <div>
+          <h2 className="text-xl font-semibold text-gray-800 mb-4">Default Accordion</h2>
+          <Accordion items={accordionItems} allowMultiple={false} defaultFirstOpen={true} />
         </div>
-        <div className="mt-8">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">다중 열림 모드</h2>
-          <Accordion items={accordionItems} allowMultiple={true} />
+        <div>
+          <h2 className="text-xl font-semibold text-gray-800 mb-4">Multiple Accordion</h2>
+          <Accordion items={accordionItems} allowMultiple={true} defaultFirstOpen={false} />
         </div>
       </div>
     </div>
