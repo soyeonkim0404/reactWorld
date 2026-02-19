@@ -1,5 +1,5 @@
-import Accordion from "@/components/Accordion";
-import type { AccordionItemProps } from "@/components/Accordion";
+import Accordion from "@/components/common/Accordion";
+import type { AccordionItemProps } from "@/components/common/Accordion";
 
 const AccordionPage = () => {
   const accordionItems: AccordionItemProps[] = [

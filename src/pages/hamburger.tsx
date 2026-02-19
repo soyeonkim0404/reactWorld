@@ -1,55 +1,55 @@
-import VerticalNavi from "@/components/VerticalNavi";
-import type { NavItem } from "@/components/VerticalNavi";
+import VerticalNavi from "../components/common/VerticalNavi";
+import type { NavItem } from "../components/common/VerticalNavi";
 
 const Hamburger = () => {
   const navItems: NavItem[] = [
     {
-      label: "홈",
+      label: "Home",
       path: "/",
     },
     {
-      label: "컴포넌트",
+      label: "1.depth",
       path: "/components",
       children: [
         {
-          label: "아코디언",
-          path: "/accordion",
+          label: "1-1.menu",
+          path: "/",
         },
         {
-          label: "카드",
-          path: "/cards",
+          label: "1-2.menu",
+          path: "/",
           children: [
             {
-              label: "카드 목록",
-              path: "/cards/list",
+              label: "1-2-1.menu",
+              path: "/",
             },
             {
-              label: "카드 상세",
-              path: "/cards/detail",
+              label: "1-2-2.menu",
+              path: "/",
             },
           ],
         },
       ],
     },
     {
-      label: "설정",
-      path: "/settings",
+      label: "2.depth",
+      path: "/",
       children: [
         {
-          label: "일반 설정",
-          path: "/settings/general",
+          label: "2-1.menu",
+          path: "/",
         },
         {
-          label: "고급 설정",
-          path: "/settings/advanced",
+          label: "2-2.menu",
+          path: "/",
           children: [
             {
-              label: "보안",
-              path: "/settings/advanced/security",
+              label: "2-2-1.menu",
+              path: "/",
             },
             {
-              label: "알림",
-              path: "/settings/advanced/notifications",
+              label: "2-2-2.menu",
+              path: "/",
             },
           ],
         },
