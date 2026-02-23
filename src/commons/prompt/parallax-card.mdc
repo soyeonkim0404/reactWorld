@@ -1,0 +1,443 @@
+---
+alwaysApply: true
+---
+
+html
+
+```
+
+ <main id="main">
+    <section class="section" aria-label="상단 섹션">
+      <div class="demo-box">
+        <h2>위 섹션</h2>
+        <p>스크롤을 내리면 패럴랙스 섹션에서 BG 페이드 전환 + 카드 13개 흐름이 보이게 됩니다.</p>
+      </div>
+    </section>
+
+    <!-- Parallax Lock Section -->
+    <section class="parallax-section" id="sensing" data-parallax-lock aria-label="Sensing Solution 패럴랙스 섹션">
+      <div class="stage" role="group" aria-roledescription="패럴랙스 스테이지">
+        <div class="content">
+          <!--배경화면 fade-->
+          <div class="bg-fade">
+            <div class="bg-fade-layer bg1"><img src="../image/card-space-1.png" alt=""></div>
+            <div class="bg-fade-layer bg2"><img src="../image/card-space-2.png" alt=""></div>
+            <div class="bg-fade-layer bg3"><img src="../image/card-space-3.png" alt=""></div>
+            <div class="bg-fade-layer bg4"><img src="../image/card-space-4.png" alt=""></div>
+          </div>
+
+          <!-- 카드 13개 -->
+          <div class="cards" aria-label="제품 카드 13개 목록">
+            <div class="scroll-thumb" aria-hidden="true"></div>
+              <article class="card" data-i="0"><img src="../image/chr1.png" alt=""></article>
+              <article class="card" data-i="1"><img src="../image/chr2.png" alt=""></article>
+              <article class="card" data-i="2"><img src="../image/chr3.png" alt=""></article>
+              <article class="card" data-i="3"><img src="../image/chr1.png" alt=""></article>
+              <article class="card" data-i="4"><img src="../image/chr2.png" alt=""></article>
+              <article class="card" data-i="5"><img src="../image/chr3.png" alt=""></article>
+              <article class="card" data-i="6"><img src="../image/chr1.png" alt=""></article>
+              <article class="card" data-i="7"><img src="../image/chr2.png" alt=""></article>
+              <article class="card" data-i="8"><img src="../image/chr3.png" alt=""></article>
+              <article class="card" data-i="9"><img src="../image/chr1.png" alt=""></article>
+              <article class="card" data-i="10"><img src="../image/chr2.png" alt=""></article>
+              <article class="card" data-i="11"><img src="../image/chr3.png" alt=""></article>
+              <article class="card" data-i="12"><img src="../image/chr1.png" alt=""></article>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section" aria-label="하단 섹션">
+      <div class="demo-box">
+        <h2>아래 섹션</h2>
+        <p>progress가 끝(100%)까지 가면 여기로 넘어옵니다.</p>
+      </div>
+    </section>
+  </main>
+
+```
+
+js
+
+```
+document.addEventListener('DOMContentLoaded', () => {
+  const section = document.querySelector('[data-parallax-lock]');
+  if (!section) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) return;
+
+  const root = document.documentElement;
+  const stage = section.querySelector('.stage');
+  const cardsWrap = section.querySelector('.cards');
+  const cards = Array.from(section.querySelectorAll('.card[data-i]'));
+  if (!stage || !cardsWrap || !cards.length) return;
+
+  // ===== helpers =====
+  const clamp01 = (v) => Math.max(0, Math.min(1, v));
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const smoothstep = (edge0, edge1, x) => {
+    const t = clamp01((x - edge0) / (edge1 - edge0));
+    return t * t * (3 - 2 * t);
+  };
+
+  // ===== BG fade =====
+  function updateBgFade(p) {
+    const s1 = smoothstep(0.00, 0.40, p);
+    const s2 = smoothstep(0.30, 0.70, p);
+    const s3 = smoothstep(0.60, 1.00, p);
+
+    const bg1 = 1 - s1;
+    const bg2 = s1 - s2;
+    const bg3 = s2 - s3;
+    const bg4 = s3;
+
+    root.style.setProperty('--bg1', Math.max(0, bg1).toFixed(4));
+    root.style.setProperty('--bg2', Math.max(0, bg2).toFixed(4));
+    root.style.setProperty('--bg3', Math.max(0, bg3).toFixed(4));
+    root.style.setProperty('--bg4', Math.max(0, bg4).toFixed(4));
+  }
+
+  // 카드 이동에 필요한 총 거리 계산 + 섹션 높이를 그에 맞게 자동 세팅
+  function measureAndSetSectionHeight() {
+    const stageH = stage.getBoundingClientRect().height || window.innerHeight;
+
+    // cardsWrap 내부 콘텐츠 실제 높이 (grid 전체 높이)
+    const contentH = cardsWrap.scrollHeight;
+
+    // 스테이지에서 보이는 영역(= cardsWrap 높이)
+    const visibleH = cardsWrap.getBoundingClientRect().height || stageH;
+
+    // 카드가 “끝까지” 올라가려면 필요한 기본 이동 거리
+    const baseTravel = Math.max(0, contentH - visibleH);
+
+    // ✅ 영상처럼 마지막에 카드가 더 “빠져나가는” 거리(연출용)
+    // 값 키우면 더 멀리 넘어감
+    const EXIT_EXTRA = Math.round(stageH * 0.55);
+
+    const totalTravel = baseTravel + EXIT_EXTRA;
+
+    // ✅ 섹션 높이를 "스테이지 높이 + 이동거리"로 맞춰주면
+    // 스크롤이 끝날 때 progress가 정확히 1이 됨
+    section.style.height = `${stageH + totalTravel}px`;
+
+    return { stageH, visibleH, contentH, baseTravel, totalTravel };
+  }
+
+  // progress = 섹션 내 스크롤 비율
+  function calcProgress() {
+    const rect = section.getBoundingClientRect();
+    const sectionTopInDoc = window.scrollY + rect.top;
+
+    const stageH = stage.getBoundingClientRect().height || window.innerHeight;
+    const sectionH = section.offsetHeight;
+
+    const maxScroll = Math.max(1, sectionH - stageH);
+    const y = window.scrollY - sectionTopInDoc;
+
+    return clamp01(y / maxScroll);
+  }
+
+  function layoutCards(p, metrics) {
+    // ✅ progress에 따라 cardsWrap 전체를 위로 이동
+    const offsetY = lerp(0, metrics.totalTravel, p);
+    cardsWrap.style.transform = `translate3d(0, ${-offsetY}px, 0)`;
+
+    // thumb(있으면)
+    root.style.setProperty('--p', p.toFixed(4));
+
+    // ✅ 중앙 강조(스테이지 중앙 기준)
+    const stageRect = stage.getBoundingClientRect();
+    const centerY = stageRect.top + stageRect.height * 0.5;
+
+    cards.forEach((card) => {
+      const r = card.getBoundingClientRect();
+      const cardCenter = (r.top + r.bottom) / 2;
+      const dist = Math.abs(cardCenter - centerY);
+
+      const focus = clamp01(1 - dist / (stageRect.height * 0.70));
+      const scale = lerp(0.92, 1.0, focus);
+      const blur = lerp(2.2, 0.0, focus);
+      const op = lerp(0.45, 1.0, focus);
+
+      //card.style.transform = `scale(${scale})`;
+      card.style.filter = `blur(${blur}px)`;
+      card.style.opacity = op.toFixed(3);
+    });
+  }
+
+  // ===== rAF scroll loop (부드럽고 안정적) =====
+  let metrics = null;
+  let ticking = false;
+
+  function update() {
+    ticking = false;
+    if (!metrics) metrics = measureAndSetSectionHeight();
+
+    const p = calcProgress();
+    updateBgFade(p);
+    layoutCards(p, metrics);
+  }
+
+  function requestTick() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }
+
+  // init
+  metrics = measureAndSetSectionHeight();
+  update();
+
+  window.addEventListener('scroll', requestTick, { passive: true });
+  window.addEventListener('resize', () => {
+    metrics = measureAndSetSectionHeight();
+    requestTick();
+  });
+});
+
+```
+
+scss
+
+```
+// ===========================================
+// Card Page Styles (page/card 전용)
+// ===========================================
+
+$color-bg: #070a0e;
+$color-bg-dark: #05080c;
+$color-bg-section: #090d12;
+$color-white-92: rgba(255, 255, 255, 0.92);
+$color-white-70: rgba(255, 255, 255, 0.70);
+$color-white-12: rgba(255, 255, 255, 0.12);
+$color-white-10: rgba(255, 255, 255, 0.10);
+$color-white-08: rgba(255, 255, 255, 0.08);
+$color-white-06: rgba(255, 255, 255, 0.06);
+$color-white-04: rgba(255, 255, 255, 0.04);
+$font-stack: ui-sans-serif, system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", Segoe UI, Roboto, Arial, sans-serif;
+$breakpoint-mobile: 980px;
+
+:root {
+  --txt: #{$color-white-92};
+  --muted: #{$color-white-70};
+  --stroke: #{$color-white-12};
+  --shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+  --radius: 22px;
+
+  /* progress + bg */
+  --p: 0;
+  --bg1: 1;
+  --bg2: 0;
+  --bg3: 0;
+  --bg4: 0;
+
+  /* cards sizing */
+  --cardSize: 360px;
+  --cardGap: 60px;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: $font-stack;
+  color: var(--txt);
+  background: $color-bg;
+  overflow-x: hidden;
+}
+
+/* Skip link (a11y) */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+
+  &:focus {
+    left: 16px;
+    top: 16px;
+    width: auto;
+    height: auto;
+    padding: 10px 12px;
+    background: #fff;
+    color: #000;
+    border-radius: 10px;
+    z-index: 9999;
+  }
+}
+
+/* 상/하단 */
+.section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 70px 20px;
+  background:
+    radial-gradient(1000px 520px at 50% 30%, $color-white-06, transparent 60%),
+    linear-gradient(180deg, $color-bg, $color-bg-section);
+
+  .demo-box {
+    width: min(960px, 100%);
+    padding: 28px 24px;
+    border-radius: 18px;
+    border: 1px solid $color-white-10;
+    background: $color-white-04;
+  }
+
+  h2 {
+    margin: 0 0 10px;
+    font-size: 26px;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+}
+
+/* Parallax Lock */
+.parallax-section {
+  position: relative;
+  height: 260vh; /* 섹션 체감 길이 */
+  background: $color-bg-dark;
+}
+
+.stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: visible;
+  isolation: isolate; /* z-index/블렌드 격리 */
+}
+
+/* 레이아웃 */
+.content {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 78px 20px 40px;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 26px;
+  z-index: 1;
+}
+
+/* BG fade */
+.bg-fade {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.bg-fade-layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity .5s ease-in-out; /* 페이드 - 전환 시간 증가 */
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/* ✅ JS 변수 연결 (핵심) */
+.bg1 { opacity: var(--bg1); }
+.bg2 { opacity: var(--bg2); }
+.bg3 { opacity: var(--bg3); }
+.bg4 { opacity: var(--bg4); }
+
+/* 카드 영역 */
+.cards {
+  position: absolute;
+  top: 0;
+  right: 5%;
+  width: 720px;
+  height: 100%;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--cardGap);
+  align-content: start;
+  padding: 200px 14px 30px 0;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+/* 스크롤 thumb */
+.scroll-thumb {
+  position: absolute;
+  top: 20px;
+  right: 4px;
+  width: 3px;
+  height: 84px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.28);
+  transform: translate3d(0, calc(var(--p) * (100% - 84px)), 0);
+  opacity: 0;
+}
+
+/* 카드 */
+.card {
+  position: relative;
+  width: var(--cardSize);
+  height: var(--cardSize);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, $color-white-10, $color-white-06);
+  border: 1px solid var(--stroke);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+  overflow: hidden;
+  transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  &:nth-child(even):not(:first-child) {
+    transform: translateY(calc(var(--cardSize) * -0.3));
+  }
+}
+
+/* 모바일 */
+@media (max-width: $breakpoint-mobile) {
+  .content {
+    grid-template-columns: 1fr;
+    padding-top: 68px;
+  }
+
+  .cards {
+    width:200px;
+    grid-template-columns: repeat(1, 1fr);
+    padding: 30px 14px 30px 0;
+    .card {
+      width: 200px;
+      height: 200px;
+      &:nth-child(even):not(:first-child) {
+        transform: none;
+      }
+    }
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .bg-fade-layer,
+  .card {
+    transition: none !important;
+  }
+}
+
+```

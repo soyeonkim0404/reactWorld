@@ -4,7 +4,7 @@ export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   theme: {
     fontFamily: {
-      sans: ['Noto Sans KR', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+      sans: ['Google Sans', 'Noto Sans KR', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
     },
   },
   plugins: [],

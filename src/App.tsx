@@ -1,9 +1,18 @@
-import { BrowserRouter, useRoutes } from 'react-router-dom';
-import { routes } from '@/routes';
+import { BrowserRouter, useLocation, useRoutes } from "react-router-dom";
+import { routes } from "@/routes";
+import HomeButton from "@/components/common/HomeButton";
 
 const AppRoutes = () => {
+  const location = useLocation();
   const element = useRoutes(routes);
-  return element;
+  const showHomeButton = location.pathname !== "/";
+
+  return (
+    <>
+      {showHomeButton && <HomeButton />}
+      {element}
+    </>
+  );
 };
 
 const App = () => {
