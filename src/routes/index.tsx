@@ -2,6 +2,7 @@ import type { RouteObject } from "react-router-dom";
 import Home from "@/pages/home";
 import AccordionPage from "@/pages/accordion";
 import Hamburger from "@/pages/hamburger";
+import HistoryPage from "@/pages/history";
 
 export const routes: RouteObject[] = [
   {
@@ -15,5 +16,9 @@ export const routes: RouteObject[] = [
   {
     path: "/hamburger",
     element: <Hamburger />,
+  },
+  {
+    path: "/history",
+    element: <HistoryPage />,
   },
 ];

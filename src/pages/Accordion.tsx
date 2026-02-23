@@ -52,15 +52,15 @@ const AccordionPage = () => {
   ];
 
   return (
-    <div className="max-w-[920px] m-auto">
-      <div className="mx-auto flex  gap-4">
+    <div className="max-w-[920px] m-auto mt-[100px]">
+      <div className="mx-auto flex gap-4">
         <div>
           <h2 className="text-xl font-semibold text-gray-800 mb-4">Default Accordion</h2>
-          <Accordion items={accordionItems} allowMultiple={false} defaultFirstOpen={true} />
+          <Accordion items={accordionItems} allowMultiple={false} defaultFirstOpen={true} className="mt-[40px]" />
         </div>
         <div>
           <h2 className="text-xl font-semibold text-gray-800 mb-4">Multiple Accordion</h2>
-          <Accordion items={accordionItems} allowMultiple={true} defaultFirstOpen={false} />
+          <Accordion items={accordionItems} allowMultiple={true} defaultFirstOpen={false} className="mt-[40px]" />
         </div>
       </div>
     </div>
