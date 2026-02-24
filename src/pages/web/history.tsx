@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { historyData } from "../api/historyData";
+import { historyData } from "@/api/historyData";
 
 function clamp(n: number, min: number, max: number) {
   return Math.max(min, Math.min(max, n));

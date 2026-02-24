@@ -1,5 +1,5 @@
-import VerticalNavi from "../components/common/VerticalNavi";
-import type { NavItem } from "../components/common/VerticalNavi";
+import VerticalNavi from "@/components/common/VerticalNavi";
+import type { NavItem } from "@/components/common/VerticalNavi";
 
 const Hamburger = () => {
   const navItems: NavItem[] = [

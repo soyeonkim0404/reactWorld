@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { mainCardData } from "../api/mainCardData";
-import DragCardItem from "../components/main/DragCardItem";
+import { mainCardData } from "@/api/mainCardData";
+import DragCardItem from "@/components/main/DragCardItem";
 
 type Pos = { x: number; y: number };
 
