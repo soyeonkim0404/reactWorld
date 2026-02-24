@@ -8,7 +8,7 @@ import HistoryPage from "@/pages/web/history";
 import History from "@/pages/web/history2";
 import ParallaxCardPage from "@/pages/web/parallaxCard";
 import Test01 from "@/pages/codingtest/test01";
-import Test01RE from "@/pages/codingtest/tes01-refectoring";
+import Test01RE from "@/pages/codingtest/tes01-refectoring.tsx";
 import DashboardIndex from "@/pages/dashboard";
 
 export const routes: RouteObject[] = [

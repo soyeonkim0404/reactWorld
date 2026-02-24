@@ -20,13 +20,10 @@ body {
 }
 
 button {
-  background: none;
-  border: none;
   cursor: pointer;
   font-family: inherit;
   vertical-align: baseline;
-  color: inherit;
-  text-align: inherit;
+  outline: none;
 }
 
 #root {
