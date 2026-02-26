@@ -1,0 +1,37 @@
+---
+alwaysApply: true
+---
+
+이 Figma 디자인 파일들을 분석해서
+각 페이지의 구조와 계층을 파악해줘.
+
+피그마 url:
+https://www.figma.com/design/gYfMbJ2GaKpUKeRo3aNtK3/SAAS-Dashboard--Community---%EB%B3%B5%EC%82%AC-?m=auto&t=X1qXi3rIdPPNsBhX-6
+
+다음 정보를 추출해줘 :
+
+1. 각 페이지의 이름과 목적
+2. 페이지간의 계층 구조(부모-자식 관계)
+3. 네비게이션 메뉴 구조(사이드바, 상단 메뉴 등)
+4. 동적 라우트가 필요한 페이지(없으면 패스)
+
+결과를 다음과 같은 형식으로 정리해줘 :
+
+- 페이지명 : URL 경로
+
+"Figma에서 분석한 페이지 구조를 기반으로
+commons/constants/url.ts에 URL enum을 추가해줘.
+
+현재 프로젝트의 url.ts 구조:
+
+- AppUrls.DASHBOARD: 대시보드 URL (나머지는 생략)
+
+요구사항:
+
+1. Figma에서 분석한 페이지를 적절한 URL 그룹에 분류
+2. 각 URL은 UPPER_SNAKE_CASE로 네이밍
+3. 동적 라우트는 함수로 정의 (없으면 패스)
+4. 기존 구조와 일관성 유지
+
+Figma 분석 결과:
+[Figma MCP에서 추출한 페이지 목록]"

@@ -1,0 +1,38 @@
+---
+alwaysApply: true
+---
+
+현재 프로젝트에 Storybook 8.6.14 버전을 설치해줘.
+
+프로젝트 정보:
+
+- React + Vite
+- 언어: TypeScript
+- 스타일링: Tailwind CSS
+- 패키지 매니저: yarn
+
+설치할 패키지 (devDependencies, 버전 8.6.14):
+
+- storybook
+- @storybook/react
+- @storybook/react-vite
+- @storybook/addon-essentials
+- @storybook/addon-interactions
+- @storybook/addon-links
+- @storybook/blocks
+- @storybook/test
+- @storybook/theming
+
+필요한 설정 파일:
+
+- .storybook/main.ts (framework: @storybook/react-vite)
+- .storybook/preview.ts (Tailwind CSS import 포함)
+
+설치 후 package.json scripts 추가:
+
+- storybook: "storybook dev -p 6006"
+- build-storybook: "storybook build"
+
+요구사항:
+
+1. yarn add -D로 devDependencies에 설치

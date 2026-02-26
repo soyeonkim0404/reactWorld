@@ -1,0 +1,29 @@
+---
+alwaysApply: true
+---
+
+color.ts와 typography.ts의 토큰을
+src/index.css의 :root에 CSS 변수로 변환해줘.
+
+요구사항 :
+
+1. --dash-\* prefix로 토큰 정의
+2. 모바일 타이포그래피는 @media (max-width: 768px)에 정의 (피그마 디자인엔 모바일 없지만 미디어쿼리만 잡아주기)
+
+변환할 파일:
+
+- src/commons/constants/color.ts
+- src/commons/constants/typography.ts"
+
+---
+
+예시:
+
+```
+
+/* src/index.css */
+:root {
+    --dash-primary-main:#605bff;
+    --dash-fontFamily-primary: "Nunito, sans-serif", sans-serif;
+}
+```

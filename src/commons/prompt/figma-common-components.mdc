@@ -1,0 +1,197 @@
+---
+alwaysApply: true
+---
+
+# Figma SAAS Dashboard 공통 컴포넌트 분석
+
+**피그마 채널**: 31p10jim  
+**출처**: [SAAS Dashboard Design](https://www.figma.com/design/gYfMbJ2GaKpUKeRo3aNtK3/SAAS-Dashboard--Community---%EB%B3%B5%EC%82%AC-?m=auto&t=X1qXi3rIdPPNsBhX-6)
+
+---
+
+## 1. 공통 UI 요소
+
+### Button (버튼)
+- **Primary Button**: CTA용 메인 버튼, 배경 #605bff, 텍스트 #ffffff
+  - variant: `primary` | `secondary` | `outline` | `ghost` | `social`
+  - size: `sm` (40px) | `md` (50px) | `lg` (60px)
+  - 상태: default, hover, focus, disabled, loading
+- **Social Button**: Google, Facebook 등 소셜 로그인
+  - variant: `google` | `facebook`
+  - size: `md` (164x50, 162x50)
+  - border: stroke #030229, cornerRadius 10
+
+### Input (입력 필드)
+- **Text Input**: 이메일, 일반 텍스트 입력
+  - variant: `default` | `withIcon` | `password`
+  - size: `md` (height 50px, width 348px)
+  - cornerRadius: 10
+  - label: 16px Nunito Regular, color #030229
+  - placeholder: 14px Nunito Regular
+- **Password Input**: 비밀번호 마스킹, 눈 아이콘 토글
+  - dot 표시 (#030229)
+  - Hide/Show 아이콘 (#030229)
+
+### Checkbox
+- **Checkbox**: 15x15, cornerRadius 2
+  - variant: `default` | `checked`
+  - stroke: #030229
+  - label: 14px Nunito Regular, #030229
+
+### Badge
+- **Notification Badge**: 카운트 표시 (Messages "49")
+  - variant: `count` | `dot`
+  - size: `sm` (22x14), `lg`
+  - background: #d11a2a
+  - text: 10px SemiBold, #d11a2a
+  - cornerRadius: 7
+- **Status Badge**: 테이블 내 수량 표시
+  - background: #26c0e2
+  - text: 12px Bold #26c0e2
+  - cornerRadius: 8
+  - padding: 61x30
+
+### Card
+- **Content Card**: 섹션 컨테이너
+  - background: #ffffff
+  - cornerRadius: 10
+  - shadow: 없음 (flat)
+- **Row Card**: 테이블 행 하이라이트
+  - background: #fafafb
+  - cornerRadius: 5
+
+### Link
+- **Text Link**: 리셋 비밀번호 등
+  - color: #605bff (primary)
+  - font: 14px Nunito Regular
+  - 상태: default, hover, visited
+
+### Divider
+- **Or Divider**: 소셜/이메일 구분
+  - line: stroke #030229
+  - text: "Or" 16px SemiBold #030229
+
+### Icon Button
+- **Nav Icon**: 사이드바 아이콘 24x24
+  - color: #030229 (기본) | #605bff (active)
+- **Logout Icon**: 17x17
+
+### Date Picker
+- **Date Input**: 시작/종료 날짜 선택
+  - size: 130x40
+  - background: #ffffff
+  - cornerRadius: 5
+  - text: 14px SemiBold #030229
+
+### Tooltip
+- **Chart Tooltip**: 차트 호버 툴팁
+  - background: #ffffff
+  - border/shadow: #030229
+  - cornerRadius: 10
+  - 화살표: 14x14
+
+### Table
+- **Data Table**: Recent Orders 등
+  - header: 12px Nunito Regular #030229
+  - row: 12px Regular, bg #fafafb (alternate)
+  - border: #030229 (1px)
+
+### Nav Item
+- **Sidebar Nav**: 메뉴 항목
+  - active: bg gradient #aca9ff, text #605bff
+  - inactive: text #030229
+  - font: 16px SemiBold
+  - padding: 24px 아이콘 + 텍스트
+
+---
+
+## 2. 컴포넌트 변형 및 크기
+
+| 컴포넌트 | Variant | Size |
+|----------|---------|------|
+| Button | primary, secondary, outline, social | sm(40), md(50), lg(60) |
+| Input | default, password, withIcon | md(50h) |
+| Badge | count, dot | sm, md |
+| Card | default, elevated | - |
+| Icon | default, active | 24x24, 20x20, 18x18 |
+
+---
+
+## 3. 디자인 토큰
+
+### 색상 (DashboardColors)
+- **Primary**: #605bff, #030229, #aca9ff
+- **Background**: #fafafb, #ffffff, #f7f7f8
+- **Text**: #000000, #030229, #ffffff, #dadada
+- **Accent**: #5b93ff, #26c0e2, #ffd66b, #ff8f6b, #ae8ff7
+- **Status**: #d11a2a (error), #26c0e2 (success)
+
+### 타이포그래피 (DashboardTypography)
+- **Font**: Nunito (primary)
+- **Weight**: 400, 600, 700, 800
+- **Size**: 10, 12, 14, 15, 16, 18, 22, 24, 30px
+
+### 간격
+- **Card padding**: 10px (cornerRadius)
+- **Input padding**: ~15px
+- **Button padding**: 50px height 기준
+- **Icon gap**: 38px (nav)
+
+---
+
+## 4. 컴포넌트 상태
+
+| 상태 | 설명 |
+|------|------|
+| default | 기본 표시 |
+| hover | 마우스 오버 (디자인 미정의, 구현 시 밝기/투명도 조정) |
+| focus | 키보드 포커스 (outline 또는 ring) |
+| disabled | 비활성 (opacity 0.5, pointer-events: none) |
+| loading | 스피너 또는 skeleton |
+| active | 현재 선택 (nav) |
+| error | 유효성 검사 실패 (border #d11a2a) |
+
+---
+
+## 5. 접근성 고려사항
+
+### ARIA 속성
+- `aria-label`: 아이콘 버튼, 로그아웃 등
+- `aria-describedby`: 입력 필드 오류 메시지 연결
+- `aria-expanded`: 드롭다운, 아코디언
+- `aria-pressed`: 토글 버튼
+- `aria-live`: 알림 배지 카운트 변경
+- `role="navigation"`: 사이드바
+- `role="main"`: 메인 콘텐츠 영역
+
+### 키보드 네비게이션
+- Tab: 포커스 순서 (Logo → 입력 → 체크박스 → 버튼 → 링크)
+- Enter/Space: 버튼, 체크박스 활성화
+- Esc: 모달, 드롭다운 닫기
+- Arrow keys: 테이블 셀, 리스트 이동
+
+### 포커스 표시
+- `:focus-visible`: 2px outline #605bff
+- `outline-offset`: 2px
+
+### 컬러 대비
+- 텍스트 #030229 on #ffffff: AAA
+- #605bff on #ffffff: AA
+- disabled 시 대비 유지
+
+---
+
+## 6. 컴포넌트 요약 (형식)
+
+- **Button**: CTA 및 액션 버튼 (primary, secondary, social / sm, md, lg / default, hover, focus, disabled, loading)
+- **Input**: 텍스트 입력 필드 (default, password / md / default, focus, error, disabled)
+- **Checkbox**: 체크박스 (default, checked / default / default, focus, disabled)
+- **Badge**: 알림 카운트, 상태 표시 (count, dot / sm, md / default)
+- **Card**: 컨텐츠 카드 컨테이너 (default, elevated / - / default)
+- **Link**: 텍스트 링크 (default / - / default, hover, visited)
+- **Divider**: 구분선 (horizontal / - / -)
+- **Icon Button**: 아이콘만 있는 버튼 (default, active / 24, 20, 18 / default, hover, focus)
+- **Date Picker**: 날짜 선택 입력 (default / md / default, focus)
+- **Tooltip**: 호버 툴팁 (default / - / -)
+- **Table**: 데이터 테이블 (default / - / -)
+- **Nav Item**: 사이드바 네비게이션 항목 (default, active / - / default, hover, active)

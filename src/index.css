@@ -3,6 +3,69 @@
 @source "../index.html";
 @source "../src/**/*.{ts,tsx}";
 
+:root {
+  /* Color tokens */
+  --dash-primary-main: #605bff;
+  --dash-primary-dark: #030229;
+  --dash-primary-light: #aca9ff;
+  --dash-background-default: #fafafb;
+  --dash-background-paper: #ffffff;
+  --dash-background-light: #f7f7f8;
+  --dash-text-primary: #000000;
+  --dash-text-secondary: #030229;
+  --dash-text-inverse: #ffffff;
+  --dash-text-muted: #dadada;
+  --dash-accent-blue: #5b93ff;
+  --dash-accent-blueLight: #80abff;
+  --dash-accent-cyan: #26c0e2;
+  --dash-accent-purple: #ae8ff7;
+  --dash-accent-violet: #605bff;
+  --dash-accent-yellow: #ffd66b;
+  --dash-accent-yellowDark: #ffc327;
+  --dash-accent-orange: #ff8f6b;
+  --dash-accent-pink: #ffc7d4;
+  --dash-chart-sale: #5b93ff;
+  --dash-chart-distribute: #ffd66b;
+  --dash-chart-return: #ff8f6b;
+  --dash-chart-line: #605bff;
+  --dash-chart-point: #ae8ff7;
+  --dash-status-error: #d11a2a;
+  --dash-status-success: #26c0e2;
+  --dash-product-blue: #297fb2;
+  --dash-icon-dark: #230b34;
+
+  /* Typography tokens */
+  --dash-fontFamily-primary: "Nunito", sans-serif;
+  --dash-fontWeight-regular: 400;
+  --dash-fontWeight-semiBold: 600;
+  --dash-fontWeight-bold: 700;
+  --dash-fontWeight-extraBold: 800;
+  --dash-fontSize-xs: 10px;
+  --dash-fontSize-sm: 12px;
+  --dash-fontSize-base: 14px;
+  --dash-fontSize-md: 15px;
+  --dash-fontSize-lg: 16px;
+  --dash-fontSize-xl: 18px;
+  --dash-fontSize-2xl: 22px;
+  --dash-fontSize-3xl: 24px;
+  --dash-fontSize-4xl: 30px;
+  --dash-lineHeight-xs: 14px;
+  --dash-lineHeight-sm: 16px;
+  --dash-lineHeight-base: 19px;
+  --dash-lineHeight-md: 20px;
+  --dash-lineHeight-lg: 22px;
+  --dash-lineHeight-xl: 25px;
+  --dash-lineHeight-2xl: 30px;
+  --dash-lineHeight-3xl: 33px;
+  --dash-lineHeight-4xl: 41px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    /* 모바일 타이포그래피 (미디어쿼리 placeholder) */
+  }
+}
+
 body {
   font-family:
     "Google Sans",

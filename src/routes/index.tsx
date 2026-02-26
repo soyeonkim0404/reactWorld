@@ -1,4 +1,5 @@
 import type { RouteObject } from "react-router-dom";
+import { AppUrls } from "@/commons/constants/url";
 import WebLayout from "@/layouts/WebLayout";
 import DashboardLayout from "@/layouts/DashboardLayout";
 import Home from "@/pages/web/home";
@@ -13,7 +14,7 @@ import DashboardIndex from "@/pages/dashboard";
 
 export const routes: RouteObject[] = [
   {
-    path: "/",
+    path: AppUrls.WEB.HOME,
     element: <WebLayout />,
     children: [
       {
@@ -21,37 +22,37 @@ export const routes: RouteObject[] = [
         element: <Home />,
       },
       {
-        path: "accordion",
+        path: AppUrls.WEB.ACCORDION.slice(1),
         element: <AccordionPage />,
       },
       {
-        path: "hamburger",
+        path: AppUrls.WEB.HAMBURGER.slice(1),
         element: <Hamburger />,
       },
       {
-        path: "history",
+        path: AppUrls.WEB.HISTORY.slice(1),
         element: <HistoryPage />,
       },
       {
-        path: "history2",
+        path: AppUrls.WEB.HISTORY2.slice(1),
         element: <History />,
       },
       {
-        path: "parallax-card",
+        path: AppUrls.WEB.PARALLAX_CARD.slice(1),
         element: <ParallaxCardPage />,
       },
       {
-        path: "coding-test/test01",
+        path: AppUrls.CODING_TEST.TEST01.slice(1),
         element: <Test01 />,
       },
       {
-        path: "coding-test/test01-refectoring",
+        path: AppUrls.CODING_TEST.TEST01_REFACTORING.slice(1),
         element: <Test01RE />,
       },
     ],
   },
   {
-    path: "/dashboard",
+    path: AppUrls.DASHBOARD.ROOT,
     element: <DashboardLayout />,
     children: [
       {

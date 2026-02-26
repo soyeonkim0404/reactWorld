@@ -1,0 +1,28 @@
+---
+alwaysApply: true
+---
+
+피그마 url:
+https://www.figma.com/design/gYfMbJ2GaKpUKeRo3aNtK3/SAAS-Dashboard--Community---%EB%B3%B5%EC%82%AC-?m=auto&t=X1qXi3rIdPPNsBhX-6
+
+피그마 채널 아이디 : 31p10jim
+
+Figma MCP에서 선택한 벡터 노드를 읽어서
+React(TypeScript) SVG 아이콘 컴포넌트로 생성해줘.
+
+규칙:
+
+- 파일: /components/dashboardIcons/Icon{PascalCase레이어이름}.tsx
+- import { SVGProps } from "react";
+- export function Icon{PascalCase레이어이름}(props: SVGProps<SVGSVGElement>)
+- <svg {...props}>
+- viewBox 유지
+- width/height 제거
+- fill 또는 stroke가 Figma에서 사용된 방식 그대로 유지
+- 단, 색상값은 모두 currentColor로 통일
+- 불필요한 group/transform 제거
+- 최소 path 구조로 정리
+
+그리고 /components/dashboardIcons/index.ts에 export 추가해줘.
+
+설명 없이 코드만 출력해줘.

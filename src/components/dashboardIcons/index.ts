@@ -1,0 +1,11 @@
+export { IconCategory } from "./IconCategory";
+export { IconActivity } from "./IconActivity";
+export { IconChart } from "./IconChart";
+export { IconTicket } from "./IconTicket";
+export { IconDocument } from "./IconDocument";
+export { IconCalendar } from "./IconCalendar";
+export { IconNotification } from "./IconNotification";
+export { IconSetting } from "./IconSetting";
+export { IconLogout } from "./IconLogout";
+export { IconEdit } from "./IconEdit";
+export { IconDelete } from "./IconDelete";

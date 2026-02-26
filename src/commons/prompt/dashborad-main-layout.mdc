@@ -1,0 +1,19 @@
+---
+alwaysApply: true
+---
+
+Figma 링크:
+https://www.figma.com/design/gYfMbJ2GaKpUKeRo3aNtK3/SAAS-Dashboard--Community---%EB%B3%B5%EC%82%AC-?node-id=0-1
+
+피그마 채널 아이디 : 7aeifru4
+
+피그마를 참고해서 대시보드 영역 작업해줘
+
+작업할 페이지:
+/pages/dashboard/index.tsx
+
+요구사항:
+
+1. 상단 숫자 박스는 grid로 작업
+2. Reports, Analytics는 차후에 그래프, 차트 js 플러그인 사용할 예정, grid로 영역만 잡아두기
+3. Recent Orders 테이블 컴포넌트 사용(DashboardSidebar.tsx)

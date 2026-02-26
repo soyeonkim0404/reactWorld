@@ -1,0 +1,326 @@
+---
+alwaysApply: false
+---
+
+# Figma SAAS Dashboard 레이아웃 분석 및 컴포넌트 구조 제안
+
+**피그마 링크**: [SAAS Dashboard (Community) 복사](https://www.figma.com/design/gYfMbJ2GaKpUKeRo3aNtK3/SAAS-Dashboard--Community---%EB%B3%B5%EC%82%AC-?node-id=0-1)  
+**피그마 채널 ID**: 7aeifru4  
+**출처**: Figma get_nodes_info 분석 결과
+
+---
+
+## 1. 홈 화면 전체 구조 (Header, Main Content, Sidebar)
+
+### 레이아웃 구성 (1440 x 1047 기준)
+
+| 영역 | 크기 | 설명 |
+|------|------|------|
+| **Sidebar (Menu)** | 218px 고정 | 좌측 네비게이션 |
+| **Main Content** | 1222px (flex) | 페이지별 메인 콘텐츠 |
+| **Header** | 페이지 내 embedded | 일부 페이지에 Date Picker 등 포함 |
+
+### Sidebar 구성 (Menu, 218px)
+- **Logo and company**: Subtract 아이콘 + "Base" 텍스트 (111x42)
+- **Menu name** (193px 폭):
+  - Dashboard (active 시 Rectangle 289 배경)
+  - Analytics, Invoice, Schedule, Calendar
+  - Messages (배지 49), Notification, Settings
+  - Illustration (Upgrade Now)
+  - Log Out (Profile photo + 텍스트)
+
+### Main Content (Dashboard 예시)
+- **Date**: Starting date / Ending date (130x40 each)
+- **Top Analytics Card**: Sales Products, Stock Products, Save products, Job Application (268x116 each)
+- **Recent Orders**: 테이블 (702x335)
+- **Top selling products**: 카드 리스트 (430x335)
+- **Analytics**: 도넛 차트 (430x408)
+- **Reports**: 라인 차트 (702x408)
+
+---
+
+## 2. Dashboard 페이지 구조 및 구성 요소
+
+| 구성요소 | 크기 | 설명 |
+|----------|------|------|
+| page header | - | "Dashboard" 텍스트 |
+| Date | 275x40 | Starting date, Ending date (Date Picker) |
+| Top Analytics Card | 1162x116 | 4개 KPI 카드 (Sales, Stock, Save, Job) |
+| Recent Orders | 702x335 | 테이블 (Tracking no, Product, Price, Total Order, Amount) |
+| Top selling products | 430x335 | 상품 카드 리스트 (이미지, 이름, 가격, 별점) |
+| Analytics | 430x408 | 도넛 차트 (Sale/Distribute/Return) |
+| Reports | 702x408 | 라인 차트 (시간대별), Tooltip |
+
+---
+
+## 3. Invoice List 구성 요소
+
+- **테이블 헤더**: 정렬 가능 컬럼
+- **행 구성**: Invoice ID, 고객정보, 금액, 상태, 액션(메뉴)
+- **Card/Row**: 배경 #fafafb, cornerRadius 5
+
+---
+
+## 4. Invoice List-Dropdown 구성 요소
+
+- Invoice List 기반 + 드롭다운 필터/액션
+- 컬럼별 정렬 화살표 (Arrow - Down)
+
+---
+
+## 5. Schedule List 구성 요소
+
+- 일정 목록 테이블
+- Date, Schedule 정보, 상태 표시
+
+---
+
+## 6. Board List 구성 요소
+
+- Task preview timeline과 유사한 Board 뷰
+- 카드 단위 (To Do / Doing / Done)
+
+---
+
+## 7. Customer List 구성 요소
+
+- **테이블 헤더**: Name, Email, Phone number, Gender (정렬 가능)
+- **행**: img(30x30), name, email, phone, Gender 버튼(Male/Female), Menu(3dot)
+- **행 높이**: 60px
+- **배경**: #fafafb (교차)
+
+---
+
+## 8. Add Customer 모달 구조 및 구성요소
+
+- **타입**: 모달 (오버레이 + 컨테이너)
+- **헤더**: "Add Customer" + Close 버튼 (40x40)
+- **테이블**: Customer List와 동일한 컬럼 구조
+- **추가 행 입력** 또는 폼 필드
+
+---
+
+## 9. Create event 구성 요소
+
+- **타입**: 모달 (466x567, 오버레이 위)
+- **헤더**: "Create an Event" + Close
+- **폼 필드**:
+  - Add title (406x42)
+  - Add People (154x40, 3 User)
+  - Add location (154x40)
+  - Find a time: Thursday. December 5 12:00pm - 1:00pm (359x40)
+  - Event / Reminder / Task 탭 (266x40)
+- **버튼**: Save, Close (93x40)
+
+---
+
+## 10. Product 구성 요소
+
+- **Header**: Product Analytics, Date Picker (136x40)
+- **Tab**: Product / Customer (211x40)
+- **KPI 카드**: Total Sales (363x182), Total Product (363x182)
+- **Product Sales Analytics**: 파이 차트 (375x334), Total Sales/Total Order/Order Cancel
+- **Top Selling Products**: 테이블 (757x487) - SN, Name, Price, Total Order, Total Sales
+- **Product Add by Month**: 프로그레스 바 (375x334) - Jan~Jul
+- **Add product** 버튼 (144x40)
+
+---
+
+## 11. Add Product 레이어팝업 구조 분석
+
+- **타입**: **레이어팝업 (Slide-over Panel)**
+- **구조**: overlay (1440x900) + add product popup (369x900) 우측 슬라이드
+- **닫기**: back btn (28x28) 좌측 상단
+- **헤더**: "Add a New Product" (168x23)
+- **폼**:
+  - image (110x110) + Camera 아이콘
+  - Product Name (309x50)
+  - Brand (309x50, 드롭다운)
+  - Price (145x50)
+  - Negotiable 체크박스 (107x20)
+  - Descriptions (309x98, textarea)
+- **액션**: Save Product (309x50)
+
+---
+
+## 12. Create Invoice 구성 요소
+
+- **2단 레이아웃**: Preview (566x875) | Create section (566x875)
+- **Preview 카드**:
+  - Logo, INVOICE DATA, RECIPIENT, ACCOUNT DATA
+  - SERVICE DATA (TASK, HOURS, RATE, TOTAL, DISCOUNT)
+  - NOTES, FOOTER
+  - Download, Print 버튼
+- **Create section**:
+  - card name: "Create New Invoice"
+  - image (134x134)
+  - Invoice Id, Date (238x50 each)
+  - Name (506x50)
+  - Email, Address (238x50 each)
+  - Product Description
+  - added product list (Product Name, Rate, QTY, Amount, Delete)
+  - add invoice 버튼 (+)
+  - Create Invoice, Send Invoice 버튼 (238x45)
+
+---
+
+## 13. Calendar Month 구성 요소
+
+- **뷰 전환**: Week / Day / Year / Month (67~82x40)
+- **캘린더 그리드**: 868x771
+  - 요일 헤더: Sun~Sat
+  - 날짜 셀: 123x127 (7x6 그리드)
+- **create shedule card** (266x772):
+  - page head: "Calendar"
+  - Menu calender (206x222): 미니 캘린더
+  - add people: Search for People, People 리스트
+  - Create Schedule 버튼 (206x45)
+  - My Schedule 버튼
+
+---
+
+## 14. Task view 구성 요소
+
+- **섹션**: To Do / Doing / Done (각 1162x256)
+- **테이블 헤더**: Check Box, Task Name, Start Date, End Date, Member, Status, Actions
+- **행**: 체크박스, 태스크명, 날짜, 멤버 수, Status 배지(Done/Pending), Edit/Delete
+- **See More** 버튼
+
+---
+
+## 15. Calendar year 구성 요소
+
+- **12개월 그리드**: Group 550~567 (289x257 each)
+- **월별**: Jan~Dec, 요일 S~F, 날짜 1~31
+- **선택**: Ellipse 119 (26x26) - December 2021
+- **헤더**: Calendar + Week/Day/Year/Month 버튼
+
+---
+
+## 16. Task preview timeline 구성 요소
+
+- **page heder**: Task Preview, Add Task, December 2021, List/Board/Timeline 탭
+- **calender and task** (916x698):
+  - 날짜 열 (01~30)
+  - 시간 행 (09:00 AM ~ 12:00 AM)
+  - 작업 카드 (가로 배치)
+- **card btn** (216x698): To Do / Doing / Done 필터
+
+---
+
+## 17. Calendar day 구성 요소
+
+- **날짜 헤더**: "December 2, 2021"
+- **타임라인**: 09:00 AM ~ 01:00 AM (74px 좌측)
+- **일정 카드**: work 1~6 (163x43) - Invited by friends, Prayer Time, lunch Time 등
+- **create shedule card**: Calendar day와 동일 구조
+- **뷰 전환**: Week / Day / Year / Month
+
+---
+
+## 18. Sign Up & Login 구성 요소
+
+- **레이아웃**: 로그인/회원가입 폼 (사이드바 없음)
+- **공통**: Logo, Input(Email, Password), Checkbox, Button, Link(Divider)
+- **Sign Up**: 소셜 버튼, Or Divider, 이메일 회원가입
+- **Login**: 동일 구조
+
+---
+
+## 19. Recover & Confirm 구성요소 (Sidebar 없을 경우)
+
+- **Recover**: 비밀번호 재설정 요청 폼
+- **Confirm**: 재설정 확인 폼
+- **Layout 제안** (사이드바 없을 때):
+  - **전체 화면 센터링**: flex center, min-height: 100vh
+  - **카드 컨테이너**: max-width 400px, padding 24px, Card 스타일
+  - **Logo**: 상단 중앙
+  - **폼**: Input 스택, Button 풀폭
+  - **링크**: 하단 텍스트 링크 (로그인으로 돌아가기 등)
+
+---
+
+## 20. Chat 구성 요소
+
+- **2단 레이아웃**: chat profile (368x839) | message (704x779)
+- **chat profile**:
+  - 리스트 항목 (308x42): 아바타(50x50), 이름, 미리보기 텍스트, 시간, 온라인 표시
+- **message 영역**:
+  - card head: 아바타, 이름, Online, Video/More 버튼 (36x36)
+  - message sender/receiver: 아바타(40x40), 말풍선, 시간
+  - text box (704x60): Type a message..., Smile, add image, send icon
+
+---
+
+## 컴포넌트 구조 제안
+
+```
+src/
+├── components/
+│   ├── layout/
+│   │   ├── DashboardLayout.tsx      # Sidebar + Main
+│   │   ├── DashboardSidebar.tsx     # 218px 메뉴
+│   │   ├── AuthLayout.tsx          # 사이드바 없는 전체화면 (Sign Up, Login, Recover, Confirm)
+│   │   └── ChatLayout.tsx          # 2단 채팅
+│   ├── dashboard/                   # 기존 (Button, Input, Card, Table, Badge 등)
+│   ├── dashboardIcons/              # 기존
+│   ├── dashboard/
+│   │   ├── TopAnalyticsCard.tsx     # KPI 카드
+│   │   ├── RecentOrdersTable.tsx
+│   │   ├── TopSellingProducts.tsx
+│   │   ├── AnalyticsChart.tsx       # 도넛
+│   │   └── ReportsChart.tsx         # 라인
+│   ├── invoice/
+│   │   ├── InvoiceList.tsx
+│   │   ├── InvoiceListDropdown.tsx
+│   │   ├── CreateInvoiceForm.tsx
+│   │   └── InvoicePreview.tsx
+│   ├── customer/
+│   │   ├── CustomerList.tsx
+│   │   └── AddCustomerModal.tsx
+│   ├── product/
+│   │   ├── ProductAnalytics.tsx
+│   │   ├── TopSellingProductsTable.tsx
+│   │   ├── ProductAddByMonth.tsx
+│   │   └── AddProductPopup.tsx      # 레이어팝업 (Slide-over)
+│   ├── calendar/
+│   │   ├── CalendarMonth.tsx
+│   │   ├── CalendarDay.tsx
+│   │   ├── CalendarYear.tsx
+│   │   ├── CreateEventModal.tsx
+│   │   ├── CreateScheduleCard.tsx
+│   │   └── MiniCalendar.tsx
+│   ├── task/
+│   │   ├── TaskView.tsx            # To Do/Doing/Done
+│   │   ├── TaskPreviewTimeline.tsx
+│   │   ├── TaskRow.tsx
+│   │   └── BoardList.tsx
+│   ├── schedule/
+│   │   └── ScheduleList.tsx
+│   ├── chat/
+│   │   ├── ChatProfileList.tsx
+│   │   ├── ChatMessageArea.tsx
+│   │   ├── ChatMessageBubble.tsx
+│   │   └── ChatInput.tsx
+│   └── auth/
+│       ├── SignUpForm.tsx
+│       ├── LoginForm.tsx
+│       ├── RecoverForm.tsx
+│       └── ConfirmForm.tsx
+├── pages/
+│   ├── dashboard/
+│   ├── invoice/
+│   ├── customer/
+│   ├── product/
+│   ├── calendar/
+│   ├── task/
+│   ├── schedule/
+│   ├── chat/
+│   └── auth/
+└── ...
+```
+
+### 공통 컴포넌트 재사용
+- `DashboardTable`, `Card`, `Button`, `Input`, `Badge`, `Checkbox` → dashboard/
+- `DatePicker` → calendar/ 및 여러 페이지
+- `Modal` vs `LayerPopup` (Add Product): 레이어팝업은 우측 슬라이드 369px
